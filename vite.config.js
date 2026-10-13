@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [],
   server: { port: 1234 },
   build: {
-    outDir: "dist",
+    outDir: "../dist",
   }
 }); 
