@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Episodios de la serie</title>
     <script type="module" src="./index.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-    holahgjghj
-
-    <input type="text" class="taskInput">
-    <button type="button" class="taskButton">Add Task</button> 
-    <ul id="users">
-    
-
-    </ul>
+    <div class="content">
+        <!-- El formulario permite buscar con el botón o con Enter. -->
+        <form class="searchForm">
+            <label for="showInput">ID o nombre de la serie</label>
+            <input id="showInput" class="taskInput" type="search" placeholder="Ej. 1 o Breaking Bad" required>
+            <button class="taskButton" type="submit">Buscar</button>
+        </form>
+        <!-- JavaScript actualiza el estado, el encabezado y los episodios. -->
+        <p class="searchMessage" role="status"></p>
+        <header></header>
+        <article class="episodes"></article>
+    </div>
 </body>
+
 </html>
