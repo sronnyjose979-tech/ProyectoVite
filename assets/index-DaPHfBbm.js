@@ -1,0 +1,11 @@
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=`2993`,t=`https://placehold.co/210x295`,n=async e=>{let n=`https://api.tvmaze.com/shows/${e}`,r=await fetch(n).then(e=>{if(!e.ok)throw Error(`No se pudo cargar la serie.`);return e.json()});return{name:r.name,rating:r.rating,image:r.image?.medium??t}},r=async e=>{let t=`https://api.tvmaze.com/shows/${e}/episodes`,n=(await fetch(t).then(e=>{if(!e.ok)throw Error(`No se pudieron cargar los episodios.`);return e.json()})).map(e=>({number:e.number,season:e.season,rating:e.rating.average}));return Object.groupBy(n,e=>e.season)},i=document.querySelector(`.content > header`),a=document.querySelector(`.episodes`),o=e=>`
+  <div class="episode episode-${e.number} rating-${Math.round(e.rating??0)}"
+       title="Episodio ${e.number}: ${e.rating??`Sin calificación`}">
+    ${e.number}
+  </div>
+`,s=(e,t)=>`
+  <article class="season">
+    <header class="season-header">T${t}</header>
+    ${e.map(o).join(``)}
+  </article>
+`;try{let t=await n(e),o=await r(e),c=document.createElement(`img`);c.className=`poster`,c.src=t.image,c.alt=t.name;let l=document.createElement(`h1`);l.textContent=t.name;let u=document.createElement(`p`);u.textContent=`Calificación: ${t.rating.average??`Sin calificación`}`,i.replaceChildren(c,l,u),a.innerHTML=Object.entries(o).map(([e,t])=>s(t,e)).join(``)}catch(e){a.textContent=`No se pudieron cargar los datos. Intenta de nuevo.`,console.error(e)}
